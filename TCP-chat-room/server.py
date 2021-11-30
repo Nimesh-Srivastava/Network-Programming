@@ -29,12 +29,15 @@ def handle(client):
                     kick_client(name_kicked) 
                 else:
                     client.send('Command refused. Tampering detected with client.py!'.encode('ascii'))
+            
             elif msg.decode('ascii').startswith('BAN'):
                 if names[clients.index(client)] == 'admin':
                     name_banned = msg.decode('ascii')[4:]
                     kick_client(name_banned)
+                    
                     with open('bans.txt', 'a') as f:
                         f.write(f'{name_banned}\n')                
+                    
                     print(f'{name_banned} is banned from the server')                
                 else:
                     client.send('Command refused. Tampering detected with client.py!'.encode('ascii'))

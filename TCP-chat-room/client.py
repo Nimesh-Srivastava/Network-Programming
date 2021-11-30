@@ -16,16 +16,21 @@ def recieve():
         global stop_thread
         if stop_thread == True:
             break
+        
         try:
             message = client.recv(1024).decode('ascii')
+            
             if message == 'NAME':
                 client.send(name.encode('ascii'))
                 next_msg = client.recv(1024).decode('ascii')
+                
                 if next_msg == 'PWD':
                     client.send(pwd.encode('ascii'))
+                    
                     if client.recv(1024).decode('ascii') == 'REF':
                         print("Wrong password. Connection refused.")
                         stop_thread = True
+                
                 elif next_msg == 'BAN':
                     print('Connection refused. This name is banned.')
                     client.close()
@@ -42,15 +47,19 @@ def write():
     while True:
         if stop_thread == True:
             break
-        message = f'{name} : {input("")}'
-        if message[len(name)+3:].startswith('/'):
+        
+        note = input("")
+        message = f'{name} : {note}'
+        
+        if message[len(name) + 3 :].startswith('/'):
             if name == 'admin':
-                if message[len(name)+3:].startswith('/kick'):
-                    client.send(f'KICK {message[len(name)+3+6:]}'.encode('ascii'))
-                elif message[len(name)+3:].startswith('/ban'):
-                    client.send(f'BAN {message[len(name)+3+5:]}'.encode('ascii'))
+                if message[len(name) + 3 :].startswith('/kick'):
+                    client.send(f'KICK {message[len(name) + 3 + 6 :]}'.encode('ascii'))
+                
+                elif message[len(name) + 3 :].startswith('/ban'):
+                    client.send(f'BAN {message[len(name) + 3 + 5 :]}'.encode('ascii'))
             else:
-                print("Commands can only be executed by admin")
+                print("Commands can only be executed by admin !")
         else:
             client.send(message.encode('ascii'))
 
