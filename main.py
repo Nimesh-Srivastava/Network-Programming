@@ -17,3 +17,8 @@ msg = MIMEMultipart()
 msg['From'] = 'TestAccount'
 msg['To'] = 'testmail@spaml.de'
 msg['Suject'] = 'Test email from python mailing client'
+
+with open('message.txt', 'r') as f:
+    message = f.read()
+
+msg.attach(MIMEText(message, 'plain'))
