@@ -21,33 +21,25 @@ def broadcast(message):
 def handle(client):
     while True:
         try:
-            message = msg = client.recv(1024)
+            msg = message = client.recv(1024)
 
             if msg.decode('ascii').startswith('KICK'):
-
                 if names[clients.index(client)] == 'admin':
-                    name_kicked = msg.decode('ascii')[5 : ]
-                    kick_client(name_kicked)
-                
+                    name_kicked = msg.decode('ascii')[5:]
+                    kick_client(name_kicked) 
                 else:
                     client.send('Command refused. Tampering detected with client.py!'.encode('ascii'))
-                
             elif msg.decode('ascii').startswith('BAN'):
                 if names[clients.index(client)] == 'admin':
-                    name_banned = msg.decode('ascii')[4 : ]
+                    name_banned = msg.decode('ascii')[4:]
                     kick_client(name_banned)
-
                     with open('bans.txt', 'a') as f:
-                        f.write(f'{name_banned}\n')
-                
-                    print(f'{name_banned} is banned from the server')
-                
+                        f.write(f'{name_banned}\n')                
+                    print(f'{name_banned} is banned from the server')                
                 else:
                     client.send('Command refused. Tampering detected with client.py!'.encode('ascii'))
-
             else:
                 broadcast(message)
-        
         except:
             index = clients.index(client)
             clients.remove(client)
@@ -69,7 +61,7 @@ def main():
         with open('bans.txt', 'r') as f:
             bans = f.readlines()
 
-        if name + '\n' in bans:
+        if name+'\n' in bans:
             client.send('BAN'.encode('ascii'))
             client.close()
             continue
@@ -79,7 +71,7 @@ def main():
             client.send('PWD'.encode('ascii'))
             pwd = client.recv(1024).decode('ascii')
 
-            if pwd != 'drowssap':
+            if pwd != 'admin':
                 client.send('REF'.encode('ascii'))
                 client.close()
                 continue
@@ -87,8 +79,8 @@ def main():
         names.append(name)
         clients.append(client)
 
-        print(f'Name of client is {name}')
-        broadcast(f'{name} has joined the room'.encode('ascii'))
+        print(f'Name of client is "{name}"')
+        broadcast(f'"{name}" has joined the room'.encode('ascii'))
 
         client.send('Connected to the server'.encode('ascii'))
 
@@ -99,12 +91,12 @@ def main():
 
 def kick_client(name):
     if name in names:
-        name_index = names.index[name]
+        name_index = names.index(name)
         kicked_client = clients[name_index]
         clients.remove(kicked_client)
         kicked_client.send('You were kicked by admin'.encode('ascii'))
         kicked_client.close()
-        names.remove[name]
+        names.remove(name)
         broadcast(f'{name} was kicked by admin'.encode('ascii'))
 
 print("Chat server has started...")

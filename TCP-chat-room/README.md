@@ -19,8 +19,6 @@ of text message (it is of 1024 Bytes) that can be sent.
 **Admin is the only one who can kick and ban other users.**
 ***
 
-<br>
-
 ## Screenshot of working system :
 Left side denotes the server, right side denotes 2 clients<br>
 <br>
