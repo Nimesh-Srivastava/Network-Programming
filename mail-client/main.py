@@ -29,7 +29,7 @@ with open('message.txt', 'r') as f:
 
 msg.attach(MIMEText(message, 'plain'))
 
-filename = 'img.jpeg'
+filename = 'https://github.com/Nimesh-Srivastava/Network-Programming/blob/main/mail-client/Image%2031-10-21%20at%204.02%20PM.jpg'
 attachment = open(filename, 'rb')
 
 p = MIMEBase('application', 'octet-stream')
