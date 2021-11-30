@@ -3,7 +3,9 @@
 This is a program to create your own private chat room over the internet.<br>
 It uses TCP, hence the name.<br>
 
-:warning: This is a private room, but the data transmission is not encrypted. Be careful what you say.
+***
+:warning: **This is a private room, but the data transmission is not encrypted. Be careful what you say and who you talk to.**
+***
 
 To host the room, edit the `server.py` to fill in the correct ip address and port number.
 
