@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 my_id = 'example@gmail.com'
 
 # recieving gmail id:
-recepient = 'emaple2@gmail.com'
+recepient = 'example2@gmail.com'
 
 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 server.ehlo()
