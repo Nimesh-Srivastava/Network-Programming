@@ -32,6 +32,11 @@ def recieve():
                         print("Wrong password. Connection refused.")
                         stop_thread = True
 
+                elif next_msg == 'BAN':
+                    print('Connection refused. This name is banned.')
+                    client.close()
+                    stop_thread = True
+
             else:
                 print(message)
         
@@ -43,8 +48,28 @@ def recieve():
 # communicate with others
 def write():
     while True:
+
+        if stop_thread:
+            break
+
         message = f'{name} : {input("")}'
-        client.send(message.encode('ascii'))
+
+        if message[len(name) + 3 : ].startswith('/'):
+            if name == 'admin':
+                if message[len(name) + 3 : ].startswith('/kick'):
+                    client.send(f'KICK {message[len(name) + 2 + 6]}'.encode('ascii'))
+                
+                elif message[len(name) + 3 : ].startswith('/ban'):
+                    client.send(f'BAN {message[len(name) + 2 + 5]}'.encode('ascii'))
+
+                else:
+                    print("Invalid command. Contact developer.")
+
+            else:
+                print("Commands can only be executed by admin")
+        
+        else:
+            client.send(message.encode('ascii'))
 
 
 recieve_thread = threading.Thread(target = recieve)
