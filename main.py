@@ -5,17 +5,23 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 
+# your gmail id:
+my_id = 'example@gmail.com'
+
+# recieving gmail id:
+recepient = 'emaple2@gmail.com'
+
 server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
 server.ehlo()
 
 with open('password.txt', 'r') as f:
     password = f.read()
 
-server.login('andromedag90@gmail.com', password)
+server.login(my_id, password)
 
 msg = MIMEMultipart()
 msg['From'] = 'TestAccount'
-msg['To'] = 'snimesh412@gmail.com'
+msg['To'] = recepient
 msg['Suject'] = 'Test email from python mailing client'
 
 with open('message.txt', 'r') as f:
@@ -37,4 +43,4 @@ p.add_header(
 msg.attach(p)
 
 text = msg.as_string()
-server.sendmail('andromedag90@gmail.com', 'snimesh412@gmail.com', text)
+server.sendmail(my_id, recepient, text)
