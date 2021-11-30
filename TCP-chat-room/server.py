@@ -2,7 +2,7 @@ import threading
 import socket
 
 host = '127.0.0.1'
-port = 99999
+port = 65000
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((host, port))
@@ -34,7 +34,7 @@ def handle(client):
             break
 
 # recieve messages
-def recieve():
+def main():
     while True:
         client, address = server.accept()
         print(f'Connected with {str(address)}')
@@ -52,3 +52,5 @@ def recieve():
         # we will run 1 thread for each client
         thread = threading.Thread(target=handle, args=(client,))
         thread.start()
+
+main()
