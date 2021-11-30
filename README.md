@@ -10,3 +10,5 @@ Secure mailing client (SSL) in python.
 * `password.txt` is used for storing the password of gmail account.
 * `message.txt` is used to store the mail that is to be sent.
 * `img.jpeg` acts as an attachment, demonstrating the client's ability to send attachments as well.
+
+Ideally, the password file should be encrypted and then stored. While performing the server login, the file should be decrypted in program and used.
