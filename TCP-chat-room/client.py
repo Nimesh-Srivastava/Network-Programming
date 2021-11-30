@@ -15,7 +15,7 @@ def recieve():
     while True:
         global stop_thread
         if stop_thread == True:
-            break
+            exit()
         
         try:
             message = client.recv(1024).decode('ascii')
@@ -30,23 +30,25 @@ def recieve():
                     if client.recv(1024).decode('ascii') == 'REF':
                         print("Wrong password. Connection refused.")
                         stop_thread = True
+                        exit()
                 
                 elif next_msg == 'BAN':
                     print('Connection refused. This name is banned.')
                     client.close()
                     stop_thread = True
+                    exit()
             else:
                 print(message)      
         except:
             print("Some error has occured. Closing client")
             client.close()
-            break
+            exit()
 
 # communicate with others
 def write():
     while True:
         if stop_thread == True:
-            break
+            exit()
         
         note = input("")
         message = f'{name} : {note}'
