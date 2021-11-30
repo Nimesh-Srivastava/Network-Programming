@@ -41,13 +41,14 @@ def handle(client):
             else:
                 broadcast(message)
         except:
-            index = clients.index(client)
-            clients.remove(client)
-            client.close()
-            name = names[index]
-            names.remove(name)
-            broadcast(f'{name} has been removed from the room'.encode('ascii'))
-            break
+            if client in clients:
+                index = clients.index(client)
+                clients.remove(client)
+                client.close()
+                name = names[index]
+                names.remove(name)
+                broadcast(f'{name} has been removed from the room'.encode('ascii'))
+                break
 
 # recieve messages
 def main():
