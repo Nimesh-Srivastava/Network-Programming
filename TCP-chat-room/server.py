@@ -41,6 +41,17 @@ def main():
 
         client.send('NAME'.encode('ascii'))
         name = client.recv(1024).decode('ascii')
+
+        # admin check
+        if name == 'admin':
+            client.send('PWD'.encode('ascii'))
+            pwd = client.recv(1024).decode('ascii')
+
+            if pwd != 'drowssap':
+                client.send('REF'.encode('ascii'))
+                client.close()
+                continue
+
         names.append(name)
         clients.append(client)
 
@@ -53,5 +64,5 @@ def main():
         thread = threading.Thread(target=handle, args=(client,))
         thread.start()
 
-print("Server has started")
+print("Chat server has started...")
 main()
