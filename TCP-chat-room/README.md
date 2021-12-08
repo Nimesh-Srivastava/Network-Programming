@@ -1,6 +1,6 @@
 # TCP Chat Room
 
-## 💢 Properties
+## 💢 About
 * This is a program to create your own private chat room over the internet.<br>
 * It uses TCP, hence the name.<br>
 * To host the room, edit the `server.py` to fill in the correct ip address and port number.
@@ -9,7 +9,8 @@
 of text message (it is of 1024 Bytes) that can be sent.
 <br>
 
-### 💢 Only admin can `kick` and/or `ban` other users.
+**⚠️ Only admin can `kick` and/or `ban` other users.**
+<br>
 <br>
 
 ## 💢 Screenshot of working system :
